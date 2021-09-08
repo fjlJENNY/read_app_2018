@@ -3,6 +3,7 @@ import 'package:read_app_2018/pages/about/about_page.dart';
 import 'package:read_app_2018/pages/book_classify/book_classify_page.dart';
 import 'package:read_app_2018/pages/book_mall/book_mall_page.dart';
 import 'package:read_app_2018/pages/book_shelf/book_shelf_page.dart';
+import 'package:read_app_2018/utils/sharedPreferencesUtil.dart';
 
 // 主界面
 
@@ -48,6 +49,15 @@ class _MainPageState extends State<MainPage> {
         AboutUs(),
       ];
     }
+
+    testSharedPreferences();
+  }
+
+  testSharedPreferences() async {
+    await SpUtil.setItem("test", "a");
+
+    var d = SpUtil.getItem("test");
+    print(d.runtimeType);
   }
 
   @override
