@@ -54,10 +54,10 @@ class _MainPageState extends State<MainPage> {
   }
 
   testSharedPreferences() async {
-    await SpUtil.setItem("test", "a");
+    await SpUtil.setItem("test", false);
 
-    var d = SpUtil.getItem("test");
-    print(d.runtimeType);
+    bool d = SpUtil.getItem("test2") ?? false;
+    print(d);
   }
 
   @override

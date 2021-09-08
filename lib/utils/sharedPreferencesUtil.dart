@@ -85,7 +85,7 @@ class SpUtil {
   // 4项 基础数据  int double , String , bool ,
   // 1项 StringList
   // ?? 为什么不用 String , 是为了 String a = SpUtil.getItem(key); // 直接获取对应类型
-  static getItem(String key) {
+  static T? getItem<T>(String key) {
     if (!isInitialzed()) {
       assert(() {
         if (_prefs == null) {
