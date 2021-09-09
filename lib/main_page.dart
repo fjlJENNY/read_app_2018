@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:read_app_2018/pages/about/about_page.dart';
 import 'package:read_app_2018/pages/book_classify/book_classify_page.dart';
 import 'package:read_app_2018/pages/book_mall/book_mall_page.dart';
 import 'package:read_app_2018/pages/book_shelf/book_shelf_page.dart';
 import 'package:read_app_2018/utils/sharedPreferencesUtil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // 主界面
 
@@ -54,9 +57,10 @@ class _MainPageState extends State<MainPage> {
   }
 
   testSharedPreferences() async {
-    await SpUtil.setItem("test", false);
+    Set<String> a = <String>{"s", 'b'};
+    await SpUtil.setItem("test", a);
 
-    bool d = SpUtil.getItem("test2") ?? false;
+    var d = SpUtil.getItem<Set>("test");
     print(d);
   }
 
@@ -110,4 +114,24 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
+}
+
+class User {
+  User({
+    required this.id,
+    required this.name,
+  });
+
+  final int id;
+  final String name;
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"] == null ? null : json["id"],
+        name: json["name"] == null ? null : json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id == null ? null : id,
+        "name": name == null ? null : name,
+      };
 }
