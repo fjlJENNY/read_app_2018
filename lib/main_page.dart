@@ -74,7 +74,7 @@ class _MainPageState extends State<MainPage> {
     return Offstage(
       offstage: _activeIndex != index,
       child: TickerMode(
-        // 怎么说
+        // 清除动画
         enabled: _activeIndex == index,
         child: Container(
           color: Colors.blue,
