@@ -34,6 +34,9 @@ dependencies:
   # sentry_flutter: ^6.0.0
   # json_annotation: ^4.1.0
 
+  webview_flutter: 2.0.13
+  card_swiper: 1.0.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

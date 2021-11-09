@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:dio/adapter.dart';
 import "package:dio/dio.dart";
+import 'package:read_app_2018/utils/sharedPreferencesUtil.dart';
 
 // 单例模式
 class HttpUtil {
@@ -13,7 +17,25 @@ class HttpUtil {
   );
 
   HttpUtil._() {
+    print(' ====== http util ====== ');
     dio = Dio(defaultOptions);
+
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (client) {
+      String _proxyHost = SpUtil.getItem("proxyHost").trim();
+      String _proxyPort = SpUtil.getItem("proxyPort").trim();
+
+      if (Platform.isAndroid) {
+        client.badCertificateCallback =
+            (X509Certificate cert, String host, int port) {
+          return Platform.isAndroid;
+        };
+      }
+      // config the http client
+      client.findProxy = (uri) {
+        return "PROXY $_proxyHost:$_proxyPort";
+      };
+    };
   }
 
   factory HttpUtil() {
